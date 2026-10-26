@@ -362,7 +362,7 @@ class Things3Destination: TaskDestination {
             scriptSource = """
                 tell application id "com.culturedcode.ThingsMac"
                     set newTodo to make new to do with properties {\(properties)}
-                    move newTodo to project "\(escapedProject)"
+                    set project of newTodo to project "\(escapedProject)"
                 \(dueDateScript)
                     return id of newTodo
                 end tell
@@ -429,7 +429,7 @@ class Things3Destination: TaskDestination {
                 .replacingOccurrences(of: "\u{1F4C2} ", with: "")
             if listName.hasPrefix("\u{1F4C1} ") {
                 let escapedProject = Things3Destination.appleScriptEscape(cleanList)
-                scriptLines.append("    move newTodo to project \"\(escapedProject)\"")
+                scriptLines.append("    set project of newTodo to project \"\(escapedProject)\"")
             }
 
             // Set due date using locale-independent date components
